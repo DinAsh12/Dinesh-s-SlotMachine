@@ -2,4 +2,5 @@
 
 ## Slot Machine - Assignment 1
 
-#By: Rohan Juneja 
+#By: Dinesh Balakrishnan
+ID: 300991342

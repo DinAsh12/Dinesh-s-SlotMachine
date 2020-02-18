@@ -117,9 +117,6 @@
     <ClCompile Include="..\src\BetButton.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\MiddleSpin.cpp">
-      <Filter>Game Objects</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\MachineReel.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
@@ -130,6 +127,9 @@
       <Filter>Game Objects</Filter>
     </ClCompile>
     <ClCompile Include="..\src\LeftLabel.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MiddleLabel.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -239,9 +239,6 @@
     <ClInclude Include="..\src\ResetButton.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\MiddleSpin.h">
-      <Filter>Game Objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\MachineReel.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
@@ -255,6 +252,9 @@
       <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\src\LeftLabel.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MiddleLabel.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
   </ItemGroup>

@@ -24,7 +24,7 @@ public:
 	void clean() override;
 
 	void spin();
-	int getWheelSlotNumber();
+	int getSlotNumber();
 
 
 

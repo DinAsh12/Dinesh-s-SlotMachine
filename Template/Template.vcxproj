@@ -175,7 +175,7 @@
     <ClCompile Include="..\src\Machine.cpp" />
     <ClCompile Include="..\src\MachineReel.cpp" />
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\MiddleSpin.cpp" />
+    <ClCompile Include="..\src\MiddleLabel.cpp" />
     <ClCompile Include="..\src\MinusButton.cpp" />
     <ClCompile Include="..\src\PlusButton.cpp" />
     <ClCompile Include="..\src\QuitButton.cpp" />
@@ -213,7 +213,7 @@
     <ClInclude Include="..\src\Level1Scene.h" />
     <ClInclude Include="..\src\Machine.h" />
     <ClInclude Include="..\src\MachineReel.h" />
-    <ClInclude Include="..\src\MiddleSpin.h" />
+    <ClInclude Include="..\src\MiddleLabel.h" />
     <ClInclude Include="..\src\MinusButton.h" />
     <ClInclude Include="..\src\Move.h" />
     <ClInclude Include="..\src\PlusButton.h" />

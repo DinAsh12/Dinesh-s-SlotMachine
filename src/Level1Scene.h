@@ -15,8 +15,8 @@
 #include "PlusButton.h"
 #include "MinusButton.h"
 #include "BetButton.h"
-#include "LeftSpin.h"
-#include "MiddleSpin.h"
+#include "LeftLabel.h"
+#include "MiddleLabel.h"
 #include "MachineReel.h"
 #include "ReelImages.h"
 #include "Label.h"
@@ -38,9 +38,9 @@ public:
 
 	//setters
 	void setBalance(int money);
-	void increaseBet();
-	void decreaseBet();
-	void setBet(int bet);
+	void increaseAmount();
+	void decreaseAmount();
+	void setAmount(int bet);
 	
 	// getters
 	glm::vec2 getMousePosition();
@@ -48,11 +48,11 @@ public:
 	int getBet();
 
 	void initializeLabels();
-	void changeLeftReelImage(int reelImage);
-	void changeMiddleReelImage(int reelImage);
-	void changeRightReelImage(int reelImage);
-	void checkWinCondition();
-	void checkJackPotCondition();
+	void changeLeftReel(int reelImage);
+	void changeMiddleReel(int reelImage);
+	void changeRightReel(int reelImage);
+	void isWinTrue();
+	void isJackpotTrue();
 	int slotCombo(int slotValues[3]);
 
 private:
@@ -67,9 +67,9 @@ private:
 	std::string m_winsString;
 	std::string m_jackpotString;
 	//Starting images for the slots
-	std::string m_LeftSpinImageString = "LeftSpinDiamond";
-	std::string m_MiddleSpinImageString = "MiddleSpinDiamond";
-	std::string m_RightSpinImageString = "RightSpinDiamond";
+	std::string m_LeftSpinImageString = "LeftJackpot";
+	std::string m_MiddleSpinImageString = "MiddleJackpot";
+	std::string m_RightSpinImageString = "RightJackpot";
 
 
 	Label* m_pSlotLabel;
@@ -79,19 +79,19 @@ private:
 	
 	// game objects
 	Machine* m_pMachine;
-	SpinButton* m_pSpinButton;
-	ResetButton* m_pResetButton;
-	PlusButton* m_pPlusButton;
-	MinusButton* m_pMinusButton;
+	SpinButton* m_pSpinner;
+	ResetButton* m_pResetter;
+	PlusButton* m_pBetAmountPlus;
+	MinusButton* m_pBetAmountMinus;
 	QuitButton* m_pQuitButton;
-	BetButton* m_pBetButton;
+	BetButton* m_pBettingButton;
 	// private data member
 	glm::vec2 m_mousePosition;
 
-	LeftSpin* m_pLeftSpin;
-	MiddleSpin* m_pMiddleSpin;
-	RightSpin* m_pRightSpin;
-	MachineReel* m_pMachineReelSlot[3];
+	LeftSpin* m_pLeftLabel;
+	MiddleSpin* m_pMiddleLabel;
+	RightSpin* m_pRightLabel;
+	MachineReel* m_pMachineReelSlots[3];
 	
 	
 };

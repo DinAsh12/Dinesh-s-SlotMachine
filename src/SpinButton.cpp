@@ -41,7 +41,7 @@ bool SpinButton::ButtonClick()
 
 	return false;
 }
-int SpinButton::countsClickOnce()
+int SpinButton::countClickOnce()
 {
 	return m_pClickFlag;
 }

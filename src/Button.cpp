@@ -41,7 +41,7 @@ void Button::setMousePosition(glm::vec2 mousePosition)
 	m_mousePosition = mousePosition;
 }
 
-void Button::setMouseButtonClicked(bool clicked)
+void Button::setClickEvents(bool clicked)
 {
 	m_mouseButtonClicked = clicked;
 }

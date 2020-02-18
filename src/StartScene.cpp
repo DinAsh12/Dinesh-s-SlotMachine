@@ -63,7 +63,7 @@ void StartScene::handleEvents()
 			switch (event.button.button)
 			{
 			case SDL_BUTTON_LEFT:
-				m_pStartButton->setMouseButtonClicked(true);
+				m_pStartButton->setClickEvents(true);
 				break;
 			}
 
@@ -72,7 +72,7 @@ void StartScene::handleEvents()
 			switch (event.button.button)
 			{
 			case SDL_BUTTON_LEFT:
-				m_pStartButton->setMouseButtonClicked(false);
+				m_pStartButton->setClickEvents(false);
 				break;
 			}
 			break;

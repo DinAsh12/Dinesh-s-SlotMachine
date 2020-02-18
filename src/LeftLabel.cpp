@@ -29,7 +29,7 @@ LeftSpin::LeftSpin()
 	TheTextureManager::Instance()->load("../Assets/textures/strawberry.png",
 		"LeftStrawberry", TheGame::Instance()->getRenderer());
 
-	glm::vec2 size = TheTextureManager::Instance()->getTextureSize("LeftSpinCarrot");
+	glm::vec2 size = TheTextureManager::Instance()->getTextureSize("LeftCarrot");
 	setWidth(size.x);
 	setHeight(size.y);
 	setPosition(glm::vec2(296, 455));

@@ -4,7 +4,7 @@
  Created: Feb 16 2020
  Last Edited: Feb 18th 2020
 */
-#include "MiddleSpin.h"
+#include "MiddleLabel.h"
 
 #include <utility>
 #include "Game.h"
@@ -31,7 +31,7 @@ MiddleSpin::MiddleSpin()
 	TheTextureManager::Instance()->load("../Assets/textures/strawberry.png",
 		"MiddleStrawberry", TheGame::Instance()->getRenderer());
 
-	glm::vec2 size = TheTextureManager::Instance()->getTextureSize("MiddleSpinCarrot");
+	glm::vec2 size = TheTextureManager::Instance()->getTextureSize("MiddleCarrot");
 	setWidth(size.x);
 	setHeight(size.y);
 	setPosition(glm::vec2(473, 455));

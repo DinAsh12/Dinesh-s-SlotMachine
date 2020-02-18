@@ -18,7 +18,7 @@ public:
 
 
 	bool ButtonClick() override;
-	int countsClickOnce();
+	int countClickOnce();
 	void setClickOnce(int clickCount);
 
 private:

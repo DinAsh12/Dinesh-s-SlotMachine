@@ -29,7 +29,7 @@ RightSpin::RightSpin()
 	TheTextureManager::Instance()->load("../Assets/textures/strawberry.png",
 		"RightStrawberry", TheGame::Instance()->getRenderer());
 
-	glm::vec2 size = TheTextureManager::Instance()->getTextureSize("RightSpinCarrot");
+	glm::vec2 size = TheTextureManager::Instance()->getTextureSize("RightCarrot");
 	setWidth(size.x);
 	setHeight(size.y);
 	setPosition(glm::vec2(655, 455));

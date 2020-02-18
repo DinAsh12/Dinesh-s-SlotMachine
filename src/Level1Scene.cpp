@@ -33,55 +33,55 @@ void Level1Scene::draw()
 {
 	//drawing background and buttons
 	m_pMachine->draw();
-	m_pSpinButton->draw();
-	m_pResetButton->draw();
-	m_pPlusButton->draw();
-	m_pMinusButton->draw();
+	m_pSpinner->draw();
+	m_pResetter->draw();
+	m_pBetAmountPlus->draw();
+	m_pBetAmountMinus->draw();
 	m_pQuitButton->draw();
-	m_pBetButton->draw();
+	m_pBettingButton->draw();
 	//adding labels and spin images reels
 	m_pMoneyLabel->draw();
 	m_pBetLabel->draw();
 	m_pWinLabel->draw();
-	m_pLeftSpin->draw(m_LeftSpinImageString);
-	m_pMiddleSpin->draw(m_MiddleSpinImageString);
-	m_pRightSpin->draw(m_RightSpinImageString);
+	m_pLeftLabel->draw(m_LeftSpinImageString);
+	m_pMiddleLabel->draw(m_MiddleSpinImageString);
+	m_pRightLabel->draw(m_RightSpinImageString);
 }
 
 void Level1Scene::update()
 {
 	//Mouse click events
-	m_pSpinButton->setMousePosition(m_mousePosition);
-	m_pSpinButton->ButtonClick();
-	m_pResetButton->setMousePosition(m_mousePosition);
-	m_pResetButton->ButtonClick();
-	m_pPlusButton->setMousePosition(m_mousePosition);
-	m_pPlusButton->ButtonClick();
-	m_pMinusButton->setMousePosition(m_mousePosition);
-	m_pMinusButton->ButtonClick();
+	m_pSpinner->setMousePosition(m_mousePosition);
+	m_pSpinner->ButtonClick();
+	m_pResetter->setMousePosition(m_mousePosition);
+	m_pResetter->ButtonClick();
+	m_pBetAmountPlus->setMousePosition(m_mousePosition);
+	m_pBetAmountPlus->ButtonClick();
+	m_pBetAmountMinus->setMousePosition(m_mousePosition);
+	m_pBetAmountMinus->ButtonClick();
 	m_pQuitButton->setMousePosition(m_mousePosition);
 	m_pQuitButton->ButtonClick();
-	m_pBetButton->setMousePosition(m_mousePosition);
-	m_pBetButton->ButtonClick();
+	m_pBettingButton->setMousePosition(m_mousePosition);
+	m_pBettingButton->ButtonClick();
 	//Bet increases if plus button is clicked
-	if (m_pPlusButton->ButtonClick())
+	if (m_pBetAmountPlus->ButtonClick())
 	{
-		increaseBet();
+		increaseAmount();
 	}
 	//Bet decreased if minus button is clicked
-	if (m_pMinusButton->ButtonClick())
+	if (m_pBetAmountMinus->ButtonClick())
 	{	
-		decreaseBet();
+		decreaseAmount();
 	}
 	//Spinning started when spin button is clicked
-	if (m_pSpinButton->ButtonClick())
+	if (m_pSpinner->ButtonClick())
 	{
 		spin();
 	}
 	//Reset the game on clicking reset button
-	if (m_pResetButton->ButtonClick())
+	if (m_pResetter->ButtonClick())
 	{
-		setBet(0);
+		setAmount(0);
 		m_pBetLabel->setText("Bet: " + m_betAmountString);
 		setBalance(1000);
 		m_pMoneyLabel->setText("Balance: " + m_moneyString);
@@ -101,11 +101,11 @@ void Level1Scene::update()
 void Level1Scene::clean()
 {
 
-	delete m_pBetButton;
-	delete m_pSpinButton;
-	delete m_pMachineReelSlot[0];
-	delete m_pMachineReelSlot[1];
-	delete m_pMachineReelSlot[2];
+	delete m_pBettingButton;
+	delete m_pSpinner;
+	delete m_pMachineReelSlots[0];
+	delete m_pMachineReelSlots[1];
+	delete m_pMachineReelSlots[2];
 
 	removeAllChildren();
 }
@@ -132,12 +132,12 @@ void Level1Scene::handleEvents()
 			{
 			case SDL_BUTTON_LEFT:
 				//setting mouse button clicks to true if button clicked.
-				m_pSpinButton->setMouseButtonClicked(true);
-				m_pResetButton->setMouseButtonClicked(true);
-				m_pPlusButton->setMouseButtonClicked(true);
-				m_pMinusButton->setMouseButtonClicked(true);
-				m_pQuitButton->setMouseButtonClicked(true);
-				m_pBetButton->setMouseButtonClicked(true);
+				m_pSpinner->setClickEvents(true);
+				m_pResetter->setClickEvents(true);
+				m_pBetAmountPlus->setClickEvents(true);
+				m_pBetAmountMinus->setClickEvents(true);
+				m_pQuitButton->setClickEvents(true);
+				m_pBettingButton->setClickEvents(true);
 				break;
 			}
 		
@@ -147,19 +147,19 @@ void Level1Scene::handleEvents()
 			{
 			case SDL_BUTTON_LEFT:
 				TheSoundManager::Instance()->load("../Assets/audio/yay.ogg", "yay", SOUND_SFX);
-				m_pSpinButton->setMouseButtonClicked(false);
-				m_pResetButton->setMouseButtonClicked(false);
-				m_pPlusButton->setMouseButtonClicked(false);
-				m_pMinusButton->setMouseButtonClicked(false);
-				m_pQuitButton->setMouseButtonClicked(false);
-				m_pBetButton->setMouseButtonClicked(false);
+				m_pSpinner->setClickEvents(false);
+				m_pResetter->setClickEvents(false);
+				m_pBetAmountPlus->setClickEvents(false);
+				m_pBetAmountMinus->setClickEvents(false);
+				m_pQuitButton->setClickEvents(false);
+				m_pBettingButton->setClickEvents(false);
 
-				m_pSpinButton->setClickOnce(0);
-				m_pResetButton->setClickOnce(0);
-				m_pPlusButton->setClickOnce(0);
-				m_pMinusButton->setClickOnce(0);
+				m_pSpinner->setClickOnce(0);
+				m_pResetter->setClickOnce(0);
+				m_pBetAmountPlus->setClickOnce(0);
+				m_pBetAmountMinus->setClickOnce(0);
 				m_pQuitButton->setClickOnce(0);
-				m_pBetButton->setClickOnce(0);
+				m_pBettingButton->setClickOnce(0);
 
 				break;
 			}
@@ -185,64 +185,64 @@ void Level1Scene::start()
 	//Sets initial balance
 	setBalance(1000);
 	//Sets initial Bet
-	setBet(0);
+	setAmount(0);
 	//Gets Balance and bet and assigns to an integer
 	m_money = getBalance();
 	m_betAmount = getBet();
 	//jackpot bonus
-	m_jackpot = 500;
+	m_jackpot = 1000;
 	//assigning memory to machineReelSlots
-	m_pMachineReelSlot[0] = new MachineReel();
-	m_pMachineReelSlot[1] = new MachineReel();
-	m_pMachineReelSlot[2] = new MachineReel();
+	m_pMachineReelSlots[0] = new MachineReel();
+	m_pMachineReelSlots[1] = new MachineReel();
+	m_pMachineReelSlots[2] = new MachineReel();
 
 	initializeLabels();
 	//Adding game objects on scene
 	m_pMachine = new Machine(); // instantiates Plane
 	addChild(m_pMachine);
 	
-	m_pSpinButton = new SpinButton();
-	m_pSpinButton->setMouseButtonClicked(false);
-	addChild(m_pSpinButton);
+	m_pSpinner = new SpinButton();
+	m_pSpinner->setClickEvents(false);
+	addChild(m_pSpinner);
 	
-	m_pResetButton = new ResetButton();
-	m_pResetButton->setMouseButtonClicked(false);
-	addChild(m_pResetButton);
+	m_pResetter = new ResetButton();
+	m_pResetter->setClickEvents(false);
+	addChild(m_pResetter);
 	
-	m_pPlusButton = new PlusButton();
-	m_pPlusButton->setMouseButtonClicked(false);
-	addChild(m_pPlusButton);
+	m_pBetAmountPlus = new PlusButton();
+	m_pBetAmountPlus->setClickEvents(false);
+	addChild(m_pBetAmountPlus);
 	
-	m_pMinusButton = new MinusButton();
-	m_pMinusButton->setMouseButtonClicked(false);
-	addChild(m_pMinusButton);
+	m_pBetAmountMinus = new MinusButton();
+	m_pBetAmountMinus->setClickEvents(false);
+	addChild(m_pBetAmountMinus);
 	
 	m_pQuitButton = new QuitButton();
-	m_pQuitButton->setMouseButtonClicked(false);
+	m_pQuitButton->setClickEvents(false);
 	addChild(m_pQuitButton);
 	
-	m_pBetButton = new BetButton();
-	m_pBetButton->setMouseButtonClicked(false);
-	addChild(m_pBetButton);
+	m_pBettingButton = new BetButton();
+	m_pBettingButton->setClickEvents(false);
+	addChild(m_pBettingButton);
 	
-	m_pLeftSpin = new LeftSpin();
-	addChild(m_pLeftSpin);
-	m_pMiddleSpin = new MiddleSpin();
-	addChild(m_pMiddleSpin);
-	m_pRightSpin = new RightSpin();
-	addChild(m_pRightSpin);
+	m_pLeftLabel = new LeftSpin();
+	addChild(m_pLeftLabel);
+	m_pMiddleLabel = new MiddleSpin();
+	addChild(m_pMiddleLabel);
+	m_pRightLabel = new RightSpin();
+	addChild(m_pRightLabel);
 }
 void Level1Scene::spin()
 {
 	//Checks if the button is clicked or not
-	if (m_pSpinButton->countsClickOnce() == 0)
+	if (m_pSpinner->countClickOnce() == 0)
 	{
 		//checks balance
 		if (getBalance() < getBet())
 		{
 			m_pWinLabel->setText("No Money to Spin");
 			
-			m_pSpinButton->setMouseButtonClicked(false);
+			m_pSpinner->setClickEvents(false);
 		}
 		//If the bet is 0, raise bet error
 		else if(getBet() == 0)
@@ -257,28 +257,28 @@ void Level1Scene::spin()
 
 
 			//spin the slots and select random image
-			m_pMachineReelSlot[0]->spin();
-			m_pMachineReelSlot[1]->spin();
-			m_pMachineReelSlot[2]->spin();
+			m_pMachineReelSlots[0]->spin();
+			m_pMachineReelSlots[1]->spin();
+			m_pMachineReelSlots[2]->spin();
 			
-			int LeftSpin = m_pMachineReelSlot[0]->getWheelSlotNumber();
-			int MiddleSpin = m_pMachineReelSlot[1]->getWheelSlotNumber();
-			int RightSpin = m_pMachineReelSlot[2]->getWheelSlotNumber();
+			int LeftSpin = m_pMachineReelSlots[0]->getSlotNumber();
+			int MiddleSpin = m_pMachineReelSlots[1]->getSlotNumber();
+			int RightSpin = m_pMachineReelSlots[2]->getSlotNumber();
 
 			
 
-			changeLeftReelImage(LeftSpin);
-			changeMiddleReelImage(MiddleSpin);
-			changeRightReelImage(RightSpin);
+			changeLeftReel(LeftSpin);
+			changeMiddleReel(MiddleSpin);
+			changeRightReel(RightSpin);
 
 			//check winning conition
-			checkWinCondition();
+			isWinTrue();
 			
 			//show the win
 			std::stringstream winStream;
 			winStream << m_wins;
 			winStream >> m_winsString;
-			// If The player loses money he gets "You Lost: " Message otherwise "Yoy won".
+			// If The player loses money he gets "You Lost: " Message otherwise "You won".
 			if(m_wins ==0)
 			{
 				m_pWinLabel->setText("You Lost: " + m_betAmountString);
@@ -289,12 +289,12 @@ void Level1Scene::spin()
 			}
 			
 			//check if user won jackpot
-			checkJackPotCondition();
+			isJackpotTrue();
 		}
 
 	}
 	//set click count after all spinning functions are done
-	m_pSpinButton->setClickOnce(1);
+	m_pSpinner->setClickOnce(1);
 
 }
 
@@ -305,7 +305,7 @@ glm::vec2 Level1Scene::getMousePosition()
 void Level1Scene::decreaseMoney(int theBet)
 {
 	//Check if no clicks has done before and decrease the bet amount from your money only once
-	if (m_pSpinButton->countsClickOnce() == 0) {
+	if (m_pSpinner->countClickOnce() == 0) {
 
 		m_money -= m_betAmount;
 		stringstream moneyStream;
@@ -332,17 +332,17 @@ void Level1Scene::setBalance(int money)
 }
 
 // Decreases the bet when someone click minus button
-void Level1Scene::decreaseBet()
+void Level1Scene::decreaseAmount()
 {
 	//Check if no clicks has done before and decrease your bet only once per click
-	if (m_pBetButton->countsClickOnce() == 0) {
+	if (m_pBettingButton->countsClickOnce() == 0) {
 		m_betAmount -= 10;
-		m_pBetButton->setClickOnce(1);
+		m_pBettingButton->setClickOnce(1);
 		cout << m_betAmount << endl;
 		if(m_betAmount < 0)
 		{
-			m_pWinLabel->setText("You can't go negative on bets.");
-			setBet(0);
+			m_pWinLabel->setText("Negative bets not accepted.");
+			setAmount(0);
 		}
 		//sets integer as a string to be printed out
 		stringstream betStream;
@@ -352,12 +352,12 @@ void Level1Scene::decreaseBet()
 	}
 }
 
-void Level1Scene::increaseBet()
+void Level1Scene::increaseAmount()
 {
 	//Check if no clicks has done before and increase your bet only once per click
-	if (m_pBetButton->countsClickOnce() == 0) {
+	if (m_pBettingButton->countsClickOnce() == 0) {
 		m_betAmount += 10;
-		m_pBetButton->setClickOnce(1);
+		m_pBettingButton->setClickOnce(1);
 		cout << m_betAmount << endl;
 		//sets integer as a string to be printed out
 		stringstream betStream;
@@ -366,7 +366,7 @@ void Level1Scene::increaseBet()
 		m_pBetLabel->setText("" + m_betAmountString);
 	}
 }
-void Level1Scene::setBet(int bet)
+void Level1Scene::setAmount(int bet)
 {
 
 	m_betAmount = bet;
@@ -396,7 +396,7 @@ void Level1Scene::initializeLabels()
 
 	
 	//Adding labels
-	m_pMoneyLabel = new Label("Balance: " + m_moneyString, "Dock51", 30, white, glm::vec2(235.0f, 625.0f));
+	m_pMoneyLabel = new Label("Your Amount: " + m_moneyString, "Dock51", 30, white, glm::vec2(235.0f, 625.0f));
 	m_pMoneyLabel->setParent(this);
 	addChild(m_pMoneyLabel);
 
@@ -411,7 +411,7 @@ void Level1Scene::initializeLabels()
 
 }
 //Left Reel Image according to numbers
-void Level1Scene::changeLeftReelImage(int reelImage)
+void Level1Scene::changeLeftReel(int reelImage)
 {
 	switch (reelImage)
 	{
@@ -448,7 +448,7 @@ void Level1Scene::changeLeftReelImage(int reelImage)
 }
 
 //Middle Reel Image according to numbers
-void Level1Scene::changeMiddleReelImage(int reelImage)
+void Level1Scene::changeMiddleReel(int reelImage)
 {
 	switch (reelImage)
 	{
@@ -486,7 +486,7 @@ void Level1Scene::changeMiddleReelImage(int reelImage)
 }
 
 //Right Reel Image according to numbers
-void Level1Scene::changeRightReelImage(int reelImage)
+void Level1Scene::changeRightReel(int reelImage)
 {
 	switch (reelImage)
 	{
@@ -525,7 +525,7 @@ void Level1Scene::changeRightReelImage(int reelImage)
 }
 
 //Winning condition
-void Level1Scene::checkWinCondition()
+void Level1Scene::isWinTrue()
 {
 	int slotValue[3];
 	//set wins to 0
@@ -533,7 +533,7 @@ void Level1Scene::checkWinCondition()
 	//get image combination from slots
 	for (int i = 0; i < 3; i++)
 	{
-		slotValue[i] = m_pMachineReelSlot[i]->getWheelSlotNumber();
+		slotValue[i] = m_pMachineReelSlots[i]->getSlotNumber();
 	}
 	//check your combination and save your wins
 	m_wins += slotCombo(slotValue);
@@ -543,7 +543,7 @@ void Level1Scene::checkWinCondition()
 	
 }
 
-void Level1Scene::checkJackPotCondition()
+void Level1Scene::isJackpotTrue()
 {
 	//generate jackpot number and player number, compare them, if match inform and raise money by jackpot
 	int jackpotnumber = 0 + rand() % 501;

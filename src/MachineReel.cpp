@@ -49,7 +49,7 @@ void MachineReel::spin()
 	}
 }
 
-int MachineReel::getWheelSlotNumber()
+int MachineReel::getSlotNumber()
 {
 	return m_wheelSlotNumber;
 }
